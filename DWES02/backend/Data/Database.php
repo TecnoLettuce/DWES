@@ -18,7 +18,8 @@ class Database {
             $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->dbName, $this->username, $this->password);
             $this->conn->exec("set names utf8");
         } catch (PDOException $exception) {
-            // TODO Create a Logger class to show the errors in this class
+            echo "Error de conexión"; 
         }
+        echo "Conexión establecida";
     }
 }

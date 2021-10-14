@@ -4,11 +4,11 @@ include_once '../Data/Database.php';
 
     class ContactService{
 
-        private $database = new Database();
+        private $database = null;
 
         public function __construct()
         {
-            
+            $database = new Database();  
         }
 
         public function GetContacts() {
