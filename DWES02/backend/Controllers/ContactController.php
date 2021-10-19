@@ -22,11 +22,10 @@
         
         case 2:
             // Post
-            echo "Método POST";
             if ($data->name !=null && $data->number != null) {
                 $contact = new Contact($data->name, $data->number);
                 $result = $ContactService->CreateContact($contact);
-                
+
                 if ($result == 1) {
                     http_response_code(201);
                     break;
@@ -41,11 +40,20 @@
         case 3:
             // Put
             echo "Métido PUT"; 
+            if ($data->name != null && $data->number != null && $data->nameToUpdate != null) {
+                $contact = new Contact($data->name, $data->number);
+                $contactUpdated = $ContactService->UpdateContact($contact, $data->nameToUpdate);
+                echo json_encode($contactUpdated);
+                http_response_code(200);
+                break;
+            }
+            http_response_code(400);
             break;
 
         case 4:
             // Delete
-            echo "Método DELETE";
+            $ContactService->DeleteContactByName($_GET["name"]);
+            http_response_code(200);
             break;
             
         default:

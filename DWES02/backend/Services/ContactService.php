@@ -61,15 +61,26 @@ include_once '../Models/ContatctDTO.php';
 
         
         public function DeleteContactByName($name) {
-            // returns contact
+            $database  = new Database();
+            $query = "DELETE FROM contacts WHERE Name like '".$name."';";
+            $stmt = $database->conn->prepare($query);
+            $stmt->execute();
         }
 
         public function ResetDatabase() {
-            // returns NoContent -- Probablemente esto sea función de otro controlador
+            $database = new Database();
+            $query = "DROP TABLE contacts";
+            $stmt = $database->conn->prepare($query);
+            $stmt->execute();
         }
 
-        public function UpdateContact() {
+        public function UpdateContact($contact, $nameToUpdate) {
             // returns updated contact
+            $database = new Database();
+            $query = "UPDATE contacts SET Name = '".$contact->name."', Number = '".$contact->number."' WHERE Name LIKE '".$nameToUpdate."';";
+            $stmt = $database->conn->prepare($query);
+            $stmt->execute();
+            return new Contact($contact->name, $contact->number);
         }
 
     }
