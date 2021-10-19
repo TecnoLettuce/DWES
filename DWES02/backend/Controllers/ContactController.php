@@ -39,7 +39,6 @@
 
         case 3:
             // Put
-            echo "Métido PUT"; 
             if ($data->name != null && $data->number != null && $data->nameToUpdate != null) {
                 $contact = new Contact($data->name, $data->number);
                 $contactUpdated = $ContactService->UpdateContact($contact, $data->nameToUpdate);
