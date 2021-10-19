@@ -1,14 +1,10 @@
 <?php
-/*
-    header("Access-Control-Allow-Origin: *");
-    header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-    header("Access-Control-Max-Age: 3600");
-    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-*/
+
     include_once '../Services/ContactService.php';
+    include_once '../Models/Contact.php';
 
     $ContactService = new ContactService();
+    $data = json_decode(file_get_contents("php://input"));
 
     // Check the request method
     $RequestMethod = GetRequestMethod();
@@ -16,18 +12,40 @@
     switch ($RequestMethod) {
         case 1:
             // Get
+            if (!isset($_GET["name"])) {
+                echo json_encode($ContactService->GetContacts());
+                break;
+            }
+            $name = htmlspecialchars($_GET["name"]);
+            echo json_encode($ContactService->GetContactByName($name));
             break;
         
         case 2:
             // Post
+            echo "Método POST";
+            if ($data->name !=null && $data->number != null) {
+                $contact = new Contact($data->name, $data->number);
+                $result = $ContactService->CreateContact($contact);
+                
+                if ($result == 1) {
+                    http_response_code(201);
+                    break;
+                }
+                http_response_code(400);
+                break;
+            }
+            
+            http_response_code(400);
             break;
 
         case 3:
             // Put
+            echo "Métido PUT"; 
             break;
 
-        case 1:
+        case 4:
             // Delete
+            echo "Método DELETE";
             break;
             
         default:
