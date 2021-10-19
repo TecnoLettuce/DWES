@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <!-- Aqui va el espacio donde se muestran los datos del GetAllContacts -->
+        <!-- Formulario -->
+        <form>
+            <table>
+                <thead>
+                    <th colspan="2">Insertar/Actualizar Nuevo Contacto</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label>Nombre</label></td>
+                        <td><input type="text" id="name" required="required"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Número</label></td>
+                        <td><input type="text" id="number" required="required"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Nombre Del Usuario (Solo si estás actualizando)</label></td>
+                        <td><input type="text" id="nameToUpdate"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" value="Enviar"/>
+        </form>
+    </body>
+</html>
