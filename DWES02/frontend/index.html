@@ -8,9 +8,45 @@
     </head>
 
     <body>
-        <!-- Aqui va el espacio donde se muestran los datos del GetAllContacts -->
+        <?php 
+        
+            $agenda = array();
+
+            if (isset($_GET['Reset'])) {
+                unset($agenda);
+            }
+
+            if (!isset($_POST['name']) && !isset($_POST['number'])) {
+                echo "El formulario está vacio";
+            } else if (!NameExists($_POST['name']) && isset($_POST['number'])) {
+                <!-- Se añade el numero al formulario-->
+            } else if (NameExists($_POST['name']) && isset($_POST['number'])) {
+                <!-- Actualizar el numero -->
+            } else if (NameExists($_POST['name']) && !isset($_POST['number'])) {
+                <!-- Eliminar registro -->
+            }
+
+            if ( count($agenda) != 0 ) {
+                echo "
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
+                        <input type="submit" value="Reset" id="Reset"/>
+                    </form>
+                ";
+            }
+        
+            function NameExists ($name) {
+                foreach ($agenda as $nombre => $numero) {
+                    
+                    if($name == $nombre) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        
+        ?>
         <!-- Formulario -->
-        <form>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <table>
                 <thead>
                     <th colspan="2">Insertar/Actualizar Nuevo Contacto</th>
@@ -23,10 +59,6 @@
                     <tr>
                         <td><label>Número</label></td>
                         <td><input type="text" id="number" required="required"/></td>
-                    </tr>
-                    <tr>
-                        <td><label>Nombre Del Usuario (Solo si estás actualizando)</label></td>
-                        <td><input type="text" id="nameToUpdate"/></td>
                     </tr>
                 </tbody>
             </table>
