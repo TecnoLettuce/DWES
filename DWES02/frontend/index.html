@@ -8,43 +8,9 @@
     </head>
 
     <body>
-        <?php 
-        
-            $agenda = array();
 
-            if (isset($_GET['Reset'])) {
-                unset($agenda);
-            }
-
-            if (!isset($_POST['name']) && !isset($_POST['number'])) {
-                echo "El formulario está vacio";
-            } else if (!NameExists($_POST['name']) && isset($_POST['number'])) {
-                <!-- Se añade el numero al formulario-->
-            } else if (NameExists($_POST['name']) && isset($_POST['number'])) {
-                <!-- Actualizar el numero -->
-            } else if (NameExists($_POST['name']) && !isset($_POST['number'])) {
-                <!-- Eliminar registro -->
-            }
-
-            if ( count($agenda) != 0 ) {
-                echo "
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
-                        <input type="submit" value="Reset" id="Reset"/>
-                    </form>
-                ";
-            }
         
-            function NameExists ($name) {
-                foreach ($agenda as $nombre => $numero) {
-                    
-                    if($name == $nombre) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        
-        ?>
+
         <!-- Formulario -->
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <table>
